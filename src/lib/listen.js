@@ -15,13 +15,14 @@
 function listen(target, eventType, handler) {
     var add = 'addEventListener';
     var remove = 'removeEventListener';
+    var options = { capture: false, passive: true };
 
     if (!target.addEventListener && target.attachEvent) {
         add = 'attachEvent';
         remove = 'detachEvent';
         eventType = 'on' + eventType;
     }
-    target[add](eventType, handler, false);
+    target[add](eventType, handler, options);
 
     return {
         remove: function() {
